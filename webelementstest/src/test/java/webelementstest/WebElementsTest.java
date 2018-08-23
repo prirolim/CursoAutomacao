@@ -107,4 +107,26 @@ public class WebElementsTest {
 //				&& elementosSelecionados.get(7).isSelected() 
 //				&& elementosSelecionados.get(8).isSelected());
 	}
+	
+	@Test
+	public void testValidacaoFrame() throws InterruptedException{
+		driver.switchTo().frame("iframe_b");
+		
+		WebElement buscarTarget = driver.findElement(By.id("s"));
+		buscarTarget.sendKeys("Priscila");
+		Thread.sleep(3000);
+		
+		assertEquals("Priscila", buscarTarget.getAttribute("value"));
+		
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("iframe_d");
+		
+		WebElement buscarSelenium = driver.findElement(By.id("q"));
+		buscarSelenium.sendKeys("Priscila");
+		Thread.sleep(3000);
+		
+		assertEquals("Priscila", buscarSelenium.getAttribute("value"));
+		
+		driver.switchTo().defaultContent();
+	}
 }
