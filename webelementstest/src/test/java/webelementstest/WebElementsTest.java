@@ -73,27 +73,38 @@ public class WebElementsTest {
 		WebElement dropdownlist = driver.findElement(By.name("dropdownlist"));
 		Select listboxelements = new Select(dropdownlist);
 		listboxelements.selectByIndex(6);
-		List<WebElement> elementosSelecionados = listboxelements.getOptions();
+		List<WebElement> elementos = listboxelements.getOptions();
 		
 		Thread.sleep(3000);
 		
-		assertTrue("Opção está selecionada", elementosSelecionados.get(6).isSelected());
+		assertTrue("Opção está selecionada", elementos.get(6).isSelected());
 	}
 	
 	@Test
 	public void testValidacaoDropMulti() throws InterruptedException{
 		WebElement multiselectdropdown = driver.findElement(By.name("multiselectdropdown"));
-		Select listboxelements = new Select(multiselectdropdown);
-		listboxelements.selectByIndex(4);
-		listboxelements.selectByIndex(7);
-		listboxelements.selectByIndex(8);
+		Select listboxelementsMulti = new Select(multiselectdropdown);
+		
+		if (listboxelementsMulti.isMultiple()) {
+			listboxelementsMulti.selectByIndex(4);
+			listboxelementsMulti.selectByIndex(7);
+			listboxelementsMulti.selectByIndex(8);
+		}
 		
 		Thread.sleep(3000);
 		
-		List<WebElement> elementosSelecionados = listboxelements.getOptions();
+		List<WebElement> elementosSelecionados = listboxelementsMulti.getAllSelectedOptions();
 		
-		assertTrue("Opção está selecionada", elementosSelecionados.get(4).isSelected());
-		assertTrue("Opção está selecionada", elementosSelecionados.get(7).isSelected());
-		assertTrue("Opção está selecionada", elementosSelecionados.get(8).isSelected());
+		for (WebElement e : elementosSelecionados) {
+			System.out.println("Lista selecionada: " + e.getText());
+			boolean isSelected = ((e.getText().equals("Item 5")) 
+					|| (e.getText().equals("Item 8"))
+					|| (e.getText().equals("Item 9")));
+			assertTrue(isSelected);
+		}
+		
+//		assertTrue("Opções estão selecionadas", elementosSelecionados.get(4).isSelected() 
+//				&& elementosSelecionados.get(7).isSelected() 
+//				&& elementosSelecionados.get(8).isSelected());
 	}
 }
