@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>WebElementsTest</name>
 
-	<dependencies>
+<dependencies>
 	<dependency>
 		<groupId>org.seleniumhq.selenium</groupId>
 		<artifactId>selenium-java</artifactId>
@@ -19,6 +19,12 @@
 		<version>4.12</version>
 		<scope>test</scope>
 	</dependency>
+	<dependency>
+    	<groupId>commons-io</groupId>
+    	<artifactId>commons-io</artifactId>
+    	<version>2.6</version>
+	</dependency>
+	
 </dependencies>
 
 </project>
